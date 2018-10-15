@@ -7,11 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.viewHolder>{
-    private String[] mDataset;
+import java.util.ArrayList;
 
-    public RecyclerViewAdapter(String[] mDataset) {
-        this.mDataset = mDataset;
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.viewHolder> {
+    //    private String[] mDataset;
+    private ArrayList<Movie> mMovieDataset;
+
+    public RecyclerViewAdapter(ArrayList<Movie> mDataset) {
+        this.mMovieDataset = mDataset;
     }
 
 
@@ -28,15 +31,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull viewHolder viewHolder, int i) {
-        viewHolder.mTextView.setText(mDataset[i]);
+        viewHolder.mTextView.setText(mMovieDataset.get(i).getmTitle());
     }
 
     @Override
     public int getItemCount() {
-        return mDataset.length;
+        return mMovieDataset.size();
     }
 
-    public class viewHolder extends RecyclerView.ViewHolder{
+    public class viewHolder extends RecyclerView.ViewHolder {
         private TextView mTextView;
 
 
