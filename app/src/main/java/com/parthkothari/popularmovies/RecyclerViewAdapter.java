@@ -16,11 +16,12 @@ import java.util.ArrayList;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.viewHolder> {
     //    private String[] mDataset;
     private ArrayList<Movie> mMovieDataset;
+    private MovieCardClickListener mMovieCardClickListener;
 
-    public RecyclerViewAdapter(ArrayList<Movie> mDataset) {
-        this.mMovieDataset = mDataset;
+    public RecyclerViewAdapter(ArrayList<Movie> dataset, MovieCardClickListener clickListener) {
+        this.mMovieDataset = dataset;
+        this.mMovieCardClickListener = clickListener;
     }
-
 
     @NonNull
     @Override
@@ -41,7 +42,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 //                .error(R.drawable.no_image_available)
                 .into(viewHolder.mMoviePoster);
 
-
     }
 
     @Override
@@ -49,7 +49,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return mMovieDataset.size();
     }
 
-    public class viewHolder extends RecyclerView.ViewHolder {
+    public interface MovieCardClickListener {
+        void onMovieCardClick(int clickedItemIndex);
+    }
+
+    public class viewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView mMovieTitle;
         private ImageView mMoviePoster;
 
@@ -58,6 +62,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             super(itemView);
             mMovieTitle = (TextView) itemView.findViewById(R.id.tv_movie_title);
             mMoviePoster = (ImageView) itemView.findViewById(R.id.iv_movie_poster);
+            itemView.setOnClickListener(this);
+        }
+
+
+        @Override
+        public void onClick(View v) {
+            int clickedPosition = getAdapterPosition();
+            mMovieCardClickListener.onMovieCardClick(clickedPosition);
         }
     }
 }

@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.ExecutionException;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RecyclerViewAdapter.MovieCardClickListener {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new RecyclerViewAdapter(myMovieDataset);
+        mAdapter = new RecyclerViewAdapter(myMovieDataset, this);
         mRecyclerView.setAdapter(mAdapter);
 
 
@@ -83,6 +84,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    @Override
+    public void onMovieCardClick(int clickedItemIndex) {
+        Toast.makeText(this, "I see that you clicked on item " + clickedItemIndex, Toast.LENGTH_SHORT).show();
     }
 
     public class HttpGetRequest extends AsyncTask<String, Void, String> {
