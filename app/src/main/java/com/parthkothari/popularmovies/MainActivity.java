@@ -1,5 +1,6 @@
 package com.parthkothari.popularmovies;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -89,6 +90,10 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     @Override
     public void onMovieCardClick(int clickedItemIndex) {
         Toast.makeText(this, "I see that you clicked on item " + clickedItemIndex, Toast.LENGTH_SHORT).show();
+
+        Intent intent  = new Intent(MainActivity.this, DetailActivity.class);
+        startActivity(intent);
+
     }
 
     public class HttpGetRequest extends AsyncTask<String, Void, String> {
