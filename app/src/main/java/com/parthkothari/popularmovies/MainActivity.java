@@ -172,6 +172,10 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             Log.e(TAG, "On Post Execute - Got results " + s);
+            if (s == null){
+                Toast.makeText(MainActivity.this, "Unable to fetch data!", Toast.LENGTH_SHORT).show();
+                return;
+            }
             try {
                 JSONObject resultJson = new JSONObject(s);
                 JSONArray resultJsonArray = resultJson.getJSONArray("results");
