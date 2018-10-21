@@ -88,10 +88,16 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     }
 
     @Override
-    public void onMovieCardClick(int clickedItemIndex) {
-        Toast.makeText(this, "I see that you clicked on item " + clickedItemIndex, Toast.LENGTH_SHORT).show();
+    public void onMovieCardClick(Movie clickedMovie) {
+        Toast.makeText(this, "I see that you clicked on movie " + clickedMovie.getmTitle(), Toast.LENGTH_SHORT).show();
 
         Intent intent  = new Intent(MainActivity.this, DetailActivity.class);
+        intent.putExtra("title", clickedMovie.getmTitle());
+        intent.putExtra("overview", clickedMovie.getmOverview());
+        intent.putExtra("backdropPath", clickedMovie.getmBackdropPath());
+        intent.putExtra("releaseDate", clickedMovie.getmReleaseDate());
+        intent.putExtra("posterPath", clickedMovie.getmPosterPath());
+        intent.putExtra("averageVote", clickedMovie.getmAverageVote());
         startActivity(intent);
 
     }
@@ -146,6 +152,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
                                     , jsonMovieObject.getString("poster_path")
                                     , jsonMovieObject.getInt("id")
                                     , jsonMovieObject.getDouble("vote_average")
+                                    , jsonMovieObject.getString("overview")
+                                    , jsonMovieObject.getString("release_date")
+                                    , jsonMovieObject.getString("backdrop_path")
                             )
                     );
                 }

@@ -50,7 +50,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public interface MovieCardClickListener {
-        void onMovieCardClick(int clickedItemIndex);
+        void onMovieCardClick(Movie clickedMovie);
     }
 
     public class viewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -69,7 +69,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         @Override
         public void onClick(View v) {
             int clickedPosition = getAdapterPosition();
-            mMovieCardClickListener.onMovieCardClick(clickedPosition);
+            mMovieCardClickListener.onMovieCardClick(mMovieDataset.get(clickedPosition));
         }
     }
 }
