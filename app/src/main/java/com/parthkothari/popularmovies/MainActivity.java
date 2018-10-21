@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     public boolean onOptionsItemSelected(MenuItem item) {
         String selectedOption = item.toString();
         Toast.makeText(this, selectedOption, Toast.LENGTH_SHORT).show();
-
+        loadMovieData(selectedOption);
         return true;
     }
 
@@ -120,17 +120,26 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 
     }
 
-    public Uri buildUri(String sortCriteria){
-        Uri uri = new Uri.Builder()
+    public Uri buildUri(String sortCriteria) {
+        Uri.Builder builder = new Uri.Builder()
                 .scheme("http")
                 .authority("api.themoviedb.org")
-                .appendPath("3")
-                .appendPath("discover")
-                .appendPath("movie")
-                .appendQueryParameter("api_key", BuildConfig.TMBDApiKey)
-                .build();
-        
-        return uri;
+                .appendPath("3");
+
+        switch (sortCriteria) {
+            case "Popularity":
+                builder.appendPath("movie").appendPath("popular");
+                break;
+
+            case "Top Rated":
+                builder.appendPath("movie").appendPath("top_rated");
+                break;
+            default:
+                builder.appendPath("discover").appendPath("movie");
+        }
+
+        builder.appendQueryParameter("api_key", BuildConfig.TMBDApiKey);
+        return builder.build();
     }
 
     public class HttpGetRequest extends AsyncTask<String, Void, String> {
@@ -166,6 +175,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
             try {
                 JSONObject resultJson = new JSONObject(s);
                 JSONArray resultJsonArray = resultJson.getJSONArray("results");
+                myMovieDataset.clear();
 
                 for (int i = 0; i < resultJsonArray.length(); i++) {
                     JSONObject jsonMovieObject = resultJsonArray.getJSONObject(i);
@@ -182,7 +192,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
                     );
                 }
                 Log.e(TAG, "Total Objects created-" + Integer.toString(myMovieDataset.size()));
-
+                mRecyclerView.setAdapter(mAdapter);
 
             } catch (JSONException e) {
                 e.printStackTrace();
