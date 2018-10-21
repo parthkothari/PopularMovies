@@ -72,22 +72,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         mAdapter = new RecyclerViewAdapter(myMovieDataset, this);
         mRecyclerView.setAdapter(mAdapter);
 
-
-        //Instantiate new instance of our class
-        HttpGetRequest getRequest = new HttpGetRequest();
-
-        String myUrl = "http://api.themoviedb.org/3/discover/movie";
-        String result;
-
-        try {
-            result = getRequest.execute(myUrl).get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-
+        loadMovieData("placeholder");
     }
 
     @Override
@@ -121,6 +106,33 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 
     }
 
+    public void loadMovieData(String sortCriteria){
+        String myUrl = buildUri(sortCriteria).toString();
+
+        HttpGetRequest getRequest = new HttpGetRequest();
+        try {
+            getRequest.execute(myUrl).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public Uri buildUri(String sortCriteria){
+        Uri uri = new Uri.Builder()
+                .scheme("http")
+                .authority("api.themoviedb.org")
+                .appendPath("3")
+                .appendPath("discover")
+                .appendPath("movie")
+                .appendQueryParameter("api_key", BuildConfig.TMBDApiKey)
+                .build();
+        
+        return uri;
+    }
+
     public class HttpGetRequest extends AsyncTask<String, Void, String> {
         private final String TAG = this.getClass().getSimpleName();
 
@@ -134,18 +146,10 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         @Override
         protected String doInBackground(String... strings) {
             String results;
-            Uri uri = new Uri.Builder()
-                    .scheme("http")
-                    .authority("api.themoviedb.org")
-                    .appendPath("3")
-                    .appendPath("discover")
-                    .appendPath("movie")
-                    .appendQueryParameter("api_key", BuildConfig.TMBDApiKey)
-                    .build();
-            Log.e(TAG, "Do In Background-" + uri.toString());
-            Log.e(TAG, "Now Tring to get httpresults");
+            String resourceEndpoint = strings[0];
+
             try {
-                results = getResponseFromHttpUrl(new URL(uri.toString()));
+                results = getResponseFromHttpUrl(new URL(resourceEndpoint));
             } catch (IOException e) {
                 Log.e(TAG, "IO Exception");
                 results = null;
