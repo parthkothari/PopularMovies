@@ -5,9 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -27,7 +26,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public viewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-        LinearLayout v = (LinearLayout) LayoutInflater.from(viewGroup.getContext())
+        FrameLayout v = (FrameLayout) LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.movie_card, viewGroup, false);
 
         viewHolder vh = new viewHolder(v);
@@ -53,7 +52,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public class viewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView mMovieTitle;
         private ImageView mMoviePoster;
 
 
