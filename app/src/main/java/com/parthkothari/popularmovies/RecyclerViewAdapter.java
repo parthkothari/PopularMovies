@@ -36,7 +36,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull viewHolder viewHolder, int i) {
-        viewHolder.mMovieTitle.setText(mMovieDataset.get(i).getmTitle());
         Picasso.get()
                 .load(mMovieDataset.get(i).getmPosterPath())
 //                .error(R.drawable.no_image_available)
@@ -60,7 +59,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         public viewHolder(@NonNull View itemView) {
             super(itemView);
-            mMovieTitle = (TextView) itemView.findViewById(R.id.tv_movie_title);
             mMoviePoster = (ImageView) itemView.findViewById(R.id.iv_movie_poster);
             itemView.setOnClickListener(this);
         }
