@@ -65,8 +65,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_movie_list);
 
         mRecyclerView.setHasFixedSize(true);
-
-        mLayoutManager = new GridLayoutManager(this, 2);
+        mLayoutManager = new GridLayoutManager(this, getResources().getInteger(R.integer.poster_grid_columns));
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         mAdapter = new RecyclerViewAdapter(myMovieDataset, this);
