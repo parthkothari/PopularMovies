@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         mAdapter = new RecyclerViewAdapter(myMovieDataset, this);
         mRecyclerView.setAdapter(mAdapter);
 
-        loadMovieData("placeholder");
+        loadMovieData();
     }
 
     @Override
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     public void onMovieCardClick(Movie clickedMovie) {
         Toast.makeText(this, "I see that you clicked on movie " + clickedMovie.getmTitle(), Toast.LENGTH_SHORT).show();
 
-        Intent intent  = new Intent(MainActivity.this, DetailActivity.class);
+        Intent intent = new Intent(MainActivity.this, DetailActivity.class);
         intent.putExtra("title", clickedMovie.getmTitle());
         intent.putExtra("overview", clickedMovie.getmOverview());
         intent.putExtra("backdropPath", clickedMovie.getmBackdropPath());
@@ -106,7 +106,13 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 
     }
 
-    public void loadMovieData(String sortCriteria){
+    public void loadMovieData(String... args) {
+        String sortCriteria = new String();
+
+        if (args.length > 0){
+            sortCriteria = args[0];
+        }
+
         String myUrl = buildUri(sortCriteria).toString();
 
         HttpGetRequest getRequest = new HttpGetRequest();
