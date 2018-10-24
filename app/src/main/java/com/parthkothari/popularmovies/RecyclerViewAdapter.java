@@ -13,7 +13,6 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.viewHolder> {
-    //    private String[] mDataset;
     private ArrayList<Movie> mMovieDataset;
     private MovieCardClickListener mMovieCardClickListener;
 

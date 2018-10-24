@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -33,9 +32,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     private ArrayList<Movie> myMovieDataset = new ArrayList<>();
 
     public static String getResponseFromHttpUrl(URL url) throws IOException {
-        String TAG = "getResponseFromHttpUrl";
-        Log.e(TAG, "Trying to get response from http");
-
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
         try {
@@ -46,10 +42,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 
             boolean hasInput = scanner.hasNext();
             if (hasInput) {
-                Log.e(TAG, "Does have input");
                 return scanner.next();
             } else {
-                Log.e(TAG, "Does not have input");
                 return null;
             }
         } finally {
@@ -85,15 +79,13 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         String selectedOption = item.toString();
-        Toast.makeText(this, selectedOption, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Sorting movies by " + selectedOption, Toast.LENGTH_SHORT).show();
         loadMovieData(selectedOption);
         return true;
     }
 
     @Override
     public void onMovieCardClick(Movie clickedMovie) {
-        Toast.makeText(this, "I see that you clicked on movie " + clickedMovie.getmTitle(), Toast.LENGTH_SHORT).show();
-
         Intent intent = new Intent(MainActivity.this, DetailActivity.class);
         intent.putExtra("title", clickedMovie.getmTitle());
         intent.putExtra("overview", clickedMovie.getmOverview());
@@ -106,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     }
 
     public void loadMovieData(String... args) {
-        String sortCriteria = new String();
+        String sortCriteria = "";
 
         if (args.length > 0){
             sortCriteria = args[0];
@@ -153,7 +145,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            Log.e(TAG, "On Pre Execute");
 
         }
 
@@ -165,7 +156,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
             try {
                 results = getResponseFromHttpUrl(new URL(resourceEndpoint));
             } catch (IOException e) {
-                Log.e(TAG, "IO Exception");
                 results = null;
                 e.printStackTrace();
             }
@@ -176,9 +166,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            Log.e(TAG, "On Post Execute - Got results " + s);
             if (s == null){
-                Toast.makeText(MainActivity.this, "Unable to fetch data!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "No Data Available!", Toast.LENGTH_SHORT).show();
                 return;
             }
             try {
@@ -200,7 +189,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
                             )
                     );
                 }
-                Log.e(TAG, "Total Objects created-" + Integer.toString(myMovieDataset.size()));
                 mRecyclerView.setAdapter(mAdapter);
 
             } catch (JSONException e) {

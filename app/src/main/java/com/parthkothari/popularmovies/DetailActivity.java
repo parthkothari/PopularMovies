@@ -3,7 +3,6 @@ package com.parthkothari.popularmovies;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -36,7 +35,6 @@ public class DetailActivity extends AppCompatActivity {
         mDetailReleaseDate = findViewById(R.id.tv_detail_release_date);
         mDetailMoviePoster = findViewById(R.id.iv_detail_movie_poster);
 
-
         Intent originatorIntent = getIntent();
         Bundle movieDetails = originatorIntent.getExtras();
 
@@ -46,8 +44,6 @@ public class DetailActivity extends AppCompatActivity {
         mReleaseDate = movieDetails.getString("releaseDate");
         mPosterPath = movieDetails.getString("posterPath");
         mBackdropPath = movieDetails.getString("backdropPath");
-
-        Log.d("DetailActivity", mPosterPath);
 
         mDetailTitle.setText(mTitle);
         mDetailOverview.setText(mOverView);
