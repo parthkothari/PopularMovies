@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<Movie> myMovieDataset = new ArrayList<>();
 
     public static String getResponseFromHttpUrl(URL url) throws IOException {
@@ -62,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_movie_list);
 
         mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new GridLayoutManager(this, getResources().getInteger(R.integer.poster_grid_columns));
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, getResources().getInteger(R.integer.poster_grid_columns));
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         mAdapter = new RecyclerViewAdapter(myMovieDataset, this);

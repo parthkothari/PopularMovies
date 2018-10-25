@@ -3,7 +3,6 @@ package com.parthkothari.popularmovies;
 public class Movie {
     private String mTitle;
     private String mPosterPath;
-    private int mId;
     private double mAverageVote;
     private String mOverview;
     private String mReleaseDate;
@@ -13,7 +12,7 @@ public class Movie {
     public Movie(String mTitle, String mPosterPath, int mId, double mAverageVote, String mOverview, String mReleaseDate, String mBackdropPath) {
         this.mTitle = mTitle;
         this.mPosterPath = mPosterPath;
-        this.mId = mId;
+        int mId1 = mId;
         this.mAverageVote = mAverageVote;
         this.mOverview = mOverview;
         this.mReleaseDate = mReleaseDate;

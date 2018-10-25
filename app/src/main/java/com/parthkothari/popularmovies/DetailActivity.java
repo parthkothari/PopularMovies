@@ -10,40 +10,27 @@ import com.squareup.picasso.Picasso;
 
 public class DetailActivity extends AppCompatActivity {
 
-    private String mTitle;
-    private String mOverView;
-    private double mAverageVote;
-    private String mReleaseDate;
-    private String mPosterPath;
-    private String mBackdropPath;
-
-
-    private TextView mDetailTitle;
-    private TextView mDetailOverview;
-    private TextView mDetailAverageVote;
-    private TextView mDetailReleaseDate;
-    private ImageView mDetailMoviePoster;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        mDetailTitle = findViewById(R.id.tv_detail_title);
-        mDetailOverview = findViewById(R.id.tv_detail_overview);
-        mDetailAverageVote = findViewById(R.id.tv_detail_average_vote);
-        mDetailReleaseDate = findViewById(R.id.tv_detail_release_date);
-        mDetailMoviePoster = findViewById(R.id.iv_detail_movie_poster);
+        TextView mDetailTitle = findViewById(R.id.tv_detail_title);
+        TextView mDetailOverview = findViewById(R.id.tv_detail_overview);
+        TextView mDetailAverageVote = findViewById(R.id.tv_detail_average_vote);
+        TextView mDetailReleaseDate = findViewById(R.id.tv_detail_release_date);
+        ImageView mDetailMoviePoster = findViewById(R.id.iv_detail_movie_poster);
 
         Intent originatorIntent = getIntent();
         Bundle movieDetails = originatorIntent.getExtras();
 
-        mTitle = movieDetails.getString("title");
-        mOverView = movieDetails.getString("overview");
-        mAverageVote = movieDetails.getDouble("averageVote");
-        mReleaseDate = movieDetails.getString("releaseDate");
-        mPosterPath = movieDetails.getString("posterPath");
-        mBackdropPath = movieDetails.getString("backdropPath");
+        String mTitle = movieDetails.getString("title");
+        String mOverView = movieDetails.getString("overview");
+        double mAverageVote = movieDetails.getDouble("averageVote");
+        String mReleaseDate = movieDetails.getString("releaseDate");
+        String mPosterPath = movieDetails.getString("posterPath");
+        String mBackdropPath = movieDetails.getString("backdropPath");
 
         mDetailTitle.setText(mTitle);
         mDetailOverview.setText(mOverView);

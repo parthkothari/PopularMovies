@@ -28,8 +28,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         FrameLayout v = (FrameLayout) LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.movie_card, viewGroup, false);
 
-        viewHolder vh = new viewHolder(v);
-        return vh;
+        return new viewHolder(v);
     }
 
     @Override
