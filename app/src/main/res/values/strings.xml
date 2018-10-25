@@ -4,4 +4,6 @@
     <string name="average_rating">Average Rating</string>
     <string name="reload">Reload</string>
     <string name="data_error">Error Loading Data</string>
+    <string name="menu_sort_populatiry">Popularity</string>
+    <string name="menu_sort_toprated">Top Rated</string>
 </resources>
