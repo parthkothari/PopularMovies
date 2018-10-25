@@ -120,9 +120,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         HttpGetRequest getRequest = new HttpGetRequest();
         try {
             getRequest.execute(myUrl).get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
 
