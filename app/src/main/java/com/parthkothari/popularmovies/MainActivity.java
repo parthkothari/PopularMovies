@@ -153,17 +153,29 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     public void showPosterGrid() {
         RecyclerView movieData = findViewById(R.id.rv_movie_list);
         LinearLayout errorMessage = findViewById(R.id.ll_error_view);
+        LinearLayout progressView = findViewById(R.id.ll_load_view);
 
         movieData.setVisibility(View.VISIBLE);
         errorMessage.setVisibility(View.GONE);
+        progressView.setVisibility(View.GONE);
     }
 
     public void showErrorMessage() {
         RecyclerView movieData = findViewById(R.id.rv_movie_list);
         LinearLayout errorMessage = findViewById(R.id.ll_error_view);
+        LinearLayout progressView = findViewById(R.id.ll_load_view);
 
         movieData.setVisibility(View.GONE);
         errorMessage.setVisibility(View.VISIBLE);
+        progressView.setVisibility(View.GONE);
+    }
+
+    public void showLoadingMessage(){
+        RecyclerView movieData = findViewById(R.id.rv_movie_list);
+        LinearLayout progressView = findViewById(R.id.ll_load_view);
+
+        movieData.setVisibility(View.GONE);
+        progressView.setVisibility(View.VISIBLE);
     }
 
     public class HttpGetRequest extends AsyncTask<String, Void, String> {
@@ -172,6 +184,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            showLoadingMessage();
         }
 
         @Override
