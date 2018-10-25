@@ -10,6 +10,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -66,6 +69,14 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         mRecyclerView.setAdapter(mAdapter);
 
         loadMovieData();
+
+        Button mReloadBtn = findViewById(R.id.btn_reload);
+        mReloadBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadMovieData();
+            }
+        });
     }
 
     @Override
@@ -100,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     public void loadMovieData(String... args) {
         String sortCriteria = "";
 
-        if (args.length > 0){
+        if (args.length > 0) {
             sortCriteria = args[0];
         }
 
@@ -139,13 +150,28 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         return builder.build();
     }
 
+    public void showPosterGrid() {
+        RecyclerView movieData = findViewById(R.id.rv_movie_list);
+        LinearLayout errorMessage = findViewById(R.id.ll_error_view);
+
+        movieData.setVisibility(View.VISIBLE);
+        errorMessage.setVisibility(View.GONE);
+    }
+
+    public void showErrorMessage() {
+        RecyclerView movieData = findViewById(R.id.rv_movie_list);
+        LinearLayout errorMessage = findViewById(R.id.ll_error_view);
+
+        movieData.setVisibility(View.GONE);
+        errorMessage.setVisibility(View.VISIBLE);
+    }
+
     public class HttpGetRequest extends AsyncTask<String, Void, String> {
         private final String TAG = this.getClass().getSimpleName();
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
         }
 
         @Override
@@ -166,11 +192,13 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            if (s == null){
+            if (s == null) {
+                showErrorMessage();
                 Toast.makeText(MainActivity.this, "No Data Available!", Toast.LENGTH_SHORT).show();
                 return;
             }
             try {
+                showPosterGrid();
                 JSONObject resultJson = new JSONObject(s);
                 JSONArray resultJsonArray = resultJson.getJSONArray("results");
                 myMovieDataset.clear();
@@ -192,12 +220,15 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
                 mRecyclerView.setAdapter(mAdapter);
 
             } catch (JSONException e) {
+                showErrorMessage();
                 e.printStackTrace();
             }
         }
     }
 
 }
+
+
 
 
 
