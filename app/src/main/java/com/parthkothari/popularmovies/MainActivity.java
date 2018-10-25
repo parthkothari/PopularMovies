@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
-    private ArrayList<Movie> myMovieDataset = new ArrayList<>();
+    private final ArrayList<Movie> myMovieDataset = new ArrayList<>();
 
     private static String getResponseFromHttpUrl(URL url) throws IOException {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();

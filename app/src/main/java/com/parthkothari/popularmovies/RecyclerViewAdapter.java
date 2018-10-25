@@ -13,8 +13,8 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.viewHolder> {
-    private ArrayList<Movie> mMovieDataset;
-    private MovieCardClickListener mMovieCardClickListener;
+    private final ArrayList<Movie> mMovieDataset;
+    private final MovieCardClickListener mMovieCardClickListener;
 
     public RecyclerViewAdapter(ArrayList<Movie> dataset, MovieCardClickListener clickListener) {
         this.mMovieDataset = dataset;
@@ -50,7 +50,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public class viewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private ImageView mMoviePoster;
+        private final ImageView mMoviePoster;
 
 
         viewHolder(@NonNull View itemView) {

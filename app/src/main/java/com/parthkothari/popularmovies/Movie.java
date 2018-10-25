@@ -1,13 +1,13 @@
 package com.parthkothari.popularmovies;
 
 class Movie {
-    private String mTitle;
-    private String mPosterPath;
-    private double mAverageVote;
-    private String mOverview;
-    private String mReleaseDate;
-    private String mBackdropPath;
-    private String mPosterBaseUrl = "https://image.tmdb.org/t/p/w500";
+    private final String mTitle;
+    private final String mPosterPath;
+    private final double mAverageVote;
+    private final String mOverview;
+    private final String mReleaseDate;
+    private final String mBackdropPath;
+    private final String mPosterBaseUrl = "https://image.tmdb.org/t/p/w500";
 
     public Movie(String mTitle, String mPosterPath, int mId, double mAverageVote, String mOverview, String mReleaseDate, String mBackdropPath) {
         this.mTitle = mTitle;
