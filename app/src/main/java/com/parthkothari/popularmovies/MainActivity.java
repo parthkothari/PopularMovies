@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     private RecyclerView.Adapter mAdapter;
     private ArrayList<Movie> myMovieDataset = new ArrayList<>();
 
-    public static String getResponseFromHttpUrl(URL url) throws IOException {
+    private static String getResponseFromHttpUrl(URL url) throws IOException {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
         try {
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 
     }
 
-    public void loadMovieData(String... args) {
+    private void loadMovieData(String... args) {
         String sortCriteria = "";
 
         if (args.length > 0) {
@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 
     }
 
-    public Uri buildUri(String sortCriteria) {
+    private Uri buildUri(String sortCriteria) {
         Uri.Builder builder = new Uri.Builder()
                 .scheme("http")
                 .authority("api.themoviedb.org")
@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         return builder.build();
     }
 
-    public void showPosterGrid() {
+    private void showPosterGrid() {
         RecyclerView movieData = findViewById(R.id.rv_movie_list);
         LinearLayout errorMessage = findViewById(R.id.ll_error_view);
         LinearLayout progressView = findViewById(R.id.ll_load_view);
@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         progressView.setVisibility(View.GONE);
     }
 
-    public void showErrorMessage() {
+    private void showErrorMessage() {
         RecyclerView movieData = findViewById(R.id.rv_movie_list);
         LinearLayout errorMessage = findViewById(R.id.ll_error_view);
         LinearLayout progressView = findViewById(R.id.ll_load_view);
@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         progressView.setVisibility(View.GONE);
     }
 
-    public void showLoadingMessage(){
+    private void showLoadingMessage(){
         RecyclerView movieData = findViewById(R.id.rv_movie_list);
         LinearLayout progressView = findViewById(R.id.ll_load_view);
 
@@ -175,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         progressView.setVisibility(View.VISIBLE);
     }
 
-    public class HttpGetRequest extends AsyncTask<String, Void, String> {
+    class HttpGetRequest extends AsyncTask<String, Void, String> {
         private final String TAG = this.getClass().getSimpleName();
 
         @Override

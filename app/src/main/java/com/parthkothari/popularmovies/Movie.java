@@ -1,6 +1,6 @@
 package com.parthkothari.popularmovies;
 
-public class Movie {
+class Movie {
     private String mTitle;
     private String mPosterPath;
     private double mAverageVote;
